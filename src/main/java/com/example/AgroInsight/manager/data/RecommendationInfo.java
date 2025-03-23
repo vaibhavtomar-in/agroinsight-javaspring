@@ -1,5 +1,7 @@
 package com.example.AgroInsight.manager.data;
 
+import java.time.LocalDate;
+
 public class RecommendationInfo {
     private Long userId;
     private double nitrogen;
@@ -10,6 +12,7 @@ public class RecommendationInfo {
     private double pH;
     private double rainfall;
     private String recommendedCrop;
+    private LocalDate date;
 
     // Getters and Setters
     public Long getUserId() { return userId; }
@@ -38,4 +41,8 @@ public class RecommendationInfo {
 
     public String getRecommendedCrop() { return recommendedCrop; }
     public void setRecommendedCrop(String recommendedCrop) { this.recommendedCrop = recommendedCrop; }
+
+    public LocalDate getDate() {return date;}
+
+    public void setDate(LocalDate date) {this.date = date;}
 }

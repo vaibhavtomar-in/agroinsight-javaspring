@@ -7,17 +7,17 @@ public enum LogitracError {
             "Server crashed, reason not known"
     ),
     ACCESS_DENIED(
-            2,
+            1,
             "Access Denied",
             "User is not allowed to perform this action."
     ),
     ACCOUNT_ALREADY_EXISTS(
-            3,
+            2,
                     "account already exists",
                     "there is already a account with this phone number"
     ),
     ACCOUNT_DOES_NOT_EXIST(
-            4,
+            3,
             "account doesn't exist",
             "there is no account with this phone number"
     ),

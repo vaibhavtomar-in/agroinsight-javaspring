@@ -11,6 +11,7 @@ import com.example.AgroInsight.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,6 +51,7 @@ public class MysqlRecommendationProvider implements RecommendationProvider {
         info.setpH(recommendation.getpH());
         info.setRainfall(recommendation.getRainfall());
         info.setRecommendedCrop(recommendation.getRecommendedCrop());
+        info.setDate(recommendation.getDate().toLocalDate());
         return info;
     }
 
@@ -64,6 +66,7 @@ public class MysqlRecommendationProvider implements RecommendationProvider {
         recommendation.setpH(info.getpH());
         recommendation.setRainfall(info.getRainfall());
         recommendation.setRecommendedCrop(info.getRecommendedCrop());
+        recommendation.setDate(LocalDateTime.now());
 
         return recommendation;
     }

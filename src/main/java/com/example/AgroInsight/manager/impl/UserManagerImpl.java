@@ -1,11 +1,10 @@
 package com.example.AgroInsight.manager.impl;
 
-import com.example.AgroInsight.controller.dto.NewUserRequest;
 import com.example.AgroInsight.entities.User;
 import com.example.AgroInsight.exception.LogitracError;
 import com.example.AgroInsight.exception.LogitrackException;
 import com.example.AgroInsight.manager.UserManager;
-import com.example.AgroInsight.manager.data.UserId;
+import com.example.AgroInsight.manager.data.UserLogin;
 import com.example.AgroInsight.manager.data.UserInfo;
 import com.example.AgroInsight.provider.UserProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +18,16 @@ public class UserManagerImpl implements UserManager {
     @Autowired
     UserProvider userProvider;
 
-    public void registerUser(UserInfo userInfo) {
-        userProvider.createUser(userInfo);
+    public UserLogin registerUser(UserInfo userInfo) {
+        User user = userProvider.createUser(userInfo);
+        UserLogin user1 = new UserLogin();
+        user1.setUserId(user.getId());
+        user1.setName(user.getName());
+        return user1;
     }
 
     @Override
-    public UserId loginUser(String phoneNumber, String password) {
+    public UserLogin loginUser(String phoneNumber, String password) {
         Optional<User> existingUser = userProvider.getUserByPhoneNumber(phoneNumber);
 
         if (existingUser.isEmpty()) {
@@ -35,9 +38,11 @@ public class UserManagerImpl implements UserManager {
         if (!user.getPassword().equals(password)) {
             throw new LogitrackException(LogitracError.INVALID_PASSWORD);
         }
-        UserId userId = new UserId();
-        userId.setUserId(existingUser.get().getId());
-        return userId;
+        UserLogin user1 = new UserLogin();
+        user1.setUserId(user.getId());
+        user1.setName(user.getName());
+
+        return user1;
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.example.AgroInsight.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "recommendation")
 public class Recommendation {
@@ -37,6 +39,9 @@ public class Recommendation {
 
     @Column(name = "recommended_crop")
     private String recommendedCrop;
+
+    @Column(name = "date")
+    private LocalDateTime date;
 
     // Getters and Setters
 
@@ -119,4 +124,8 @@ public class Recommendation {
     public void setRecommendedCrop(String recommendedCrop) {
         this.recommendedCrop = recommendedCrop;
     }
+
+    public LocalDateTime getDate() {return date;}
+
+    public void setDate(LocalDateTime date) {this.date = date;}
 }

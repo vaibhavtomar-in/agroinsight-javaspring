@@ -6,7 +6,7 @@ import com.example.AgroInsight.manager.data.UserInfo;
 import java.util.Optional;
 
 public interface UserProvider {
-    void createUser(UserInfo userInfo);
+    User createUser(UserInfo userInfo);
     Optional<User> getUserByPhoneNumber(String phoneNumber);
     Optional<UserInfo> getUserById(Long userId);
 }

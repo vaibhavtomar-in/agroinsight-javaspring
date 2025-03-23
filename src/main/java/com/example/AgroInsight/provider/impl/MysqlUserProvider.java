@@ -24,7 +24,7 @@ public class MysqlUserProvider implements UserProvider {
     }
 
     @Override
-    public void createUser(UserInfo userInfo) {
+    public User createUser(UserInfo userInfo) {
         Optional<User> existingUser = userRepository.findByPhoneNumber(userInfo.getPhoneNumber());
 
         if (existingUser.isPresent()) {
@@ -32,6 +32,8 @@ public class MysqlUserProvider implements UserProvider {
         }
         User user = transform(userInfo);
         userRepository.save(user);
+        user = userRepository.findByPhoneNumber(user.getPhoneNumber()).get();
+        return user;
     }
 
     public Optional<User> getUserByPhoneNumber(String phoneNumber) {

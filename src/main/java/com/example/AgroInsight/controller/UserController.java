@@ -5,6 +5,7 @@ import com.example.AgroInsight.manager.RecommendationManager;
 import com.example.AgroInsight.manager.UserManager;
 import com.example.AgroInsight.manager.data.RecommendationInfo;
 import com.example.AgroInsight.manager.data.UserInfo;
+import com.example.AgroInsight.manager.data.UserLogin;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,17 +27,21 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<SuccessResponse> signup(HttpServletRequest request, @RequestBody NewUserRequest userRequest) {
+    public UserLoginInfo signup(HttpServletRequest request, @RequestBody NewUserRequest userRequest) {
         UserInfo userInfo = transform(userRequest);
-        userManager.registerUser(userInfo);
-        return ResponseEntity.ok(new SuccessResponse("User registered successfully!"));
+        UserLogin userLogin = userManager.registerUser(userInfo);
+        UserLoginInfo userLoginInfo = new UserLoginInfo();
+        userLoginInfo.setUserId(userLogin.getUserId());
+        userLoginInfo.setName(userLogin.getName());
+        return userLoginInfo;
     }
 
     @PostMapping("/login")
-    public UserId loginUser(@RequestBody UserLoginRequest loginRequest) {
-        com.example.AgroInsight.manager.data.UserId userId = userManager.loginUser(loginRequest.getPhoneNumber(), loginRequest.getPassword());
-        UserId userId1 = new UserId();
+    public UserLoginInfo loginUser(@RequestBody UserLoginRequest loginRequest) {
+        UserLogin userId = userManager.loginUser(loginRequest.getPhoneNumber(), loginRequest.getPassword());
+        UserLoginInfo userId1 = new UserLoginInfo();
         userId1.setUserId(userId.getUserId());
+        userId1.setName(userId.getName());
         return  userId1;
     }
 
@@ -68,6 +73,7 @@ public class UserController {
         response.setpH(info.getpH());
         response.setRainfall(info.getRainfall());
         response.setRecommendedCrop(info.getRecommendedCrop());
+        response.setDate(info.getDate());
         return response;
     }
 

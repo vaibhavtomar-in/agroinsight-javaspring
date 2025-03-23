@@ -1,5 +1,9 @@
 package com.example.AgroInsight.controller.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalDate;
+
 public class RecommendationHistoryResponse {
     private double nitrogen;
     private double phosphorus;
@@ -9,6 +13,8 @@ public class RecommendationHistoryResponse {
     private double pH;
     private double rainfall;
     private String recommendedCrop;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private LocalDate date;
 
     // Getters & Setters
 
@@ -74,5 +80,13 @@ public class RecommendationHistoryResponse {
 
     public void setRecommendedCrop(String recommendedCrop) {
         this.recommendedCrop = recommendedCrop;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }
