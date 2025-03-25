@@ -8,6 +8,9 @@ WORKDIR /app
 COPY build.gradle settings.gradle gradlew ./
 COPY gradle ./gradle
 
+# Make the gradlew script executable
+RUN chmod +x gradlew
+
 # Copy the source code
 COPY src ./src
 
@@ -18,4 +21,4 @@ RUN ./gradlew build -x test
 EXPOSE 8080
 
 # Run the Spring Boot application
-CMD ["java", "-jar", "/app/build/libs/*.jar"] 
+CMD ["java", "-jar", "/app/build/libs/*.jar"]
