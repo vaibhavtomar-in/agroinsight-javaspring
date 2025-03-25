@@ -17,11 +17,16 @@ COPY src ./src
 # Build the application
 RUN ./gradlew build -x test
 
+# Find the jar file and move it to a known location
+RUN mv $(find build/libs/ -name '*.jar' ! -name '*plain.jar') app.jar
+
 # Expose the port the app runs on
 EXPOSE 8080
 
-# Run the Spring Boot application
-# CMD ["java", "-jar", "/app/build/libs/*.jar"]
 
+# CMD ["java", "-jar", "/app/build/libs/*.jar"]
 # Run the Spring Boot application directly from the source
-CMD ["./gradlew", "bootRun"]
+#CMD ["./gradlew", "bootRun"]
+
+# Run the Spring Boot application
+CMD ["java", "-jar", "app.jar"]
