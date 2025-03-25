@@ -21,4 +21,7 @@ RUN ./gradlew build -x test
 EXPOSE 8080
 
 # Run the Spring Boot application
-CMD ["java", "-jar", "/app/build/libs/*.jar"]
+# CMD ["java", "-jar", "/app/build/libs/*.jar"]
+
+# Run the Spring Boot application directly from the source
+CMD ["./gradlew", "bootRun"]
